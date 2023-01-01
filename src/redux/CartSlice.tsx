@@ -55,8 +55,8 @@ const CartSlice = createSlice({
                         item.cartQuantity += 1
                     }
                 }
-                toast.success(`Item QTY Increased`)
             })
+            toast.success(`Item QTY Increased`)
 
             localStorage.setItem("cart", JSON.stringify(state.cartItems))
         },
@@ -65,13 +65,14 @@ const CartSlice = createSlice({
                 if (item.id === action.payload) {
                     if (item.cartQuantity > 1) {
                         item.cartQuantity -= 1
+                        toast.success(`Item QTY Decreased`)
                     } else {
                         const filtered = state.cartItems.filter((item: any) => item.id !== action.payload)
                         state.cartItems = filtered
+                        toast.success(`Item Removed From Cart`)
                     }
                 }
             })
-            toast.success(`Item QTY Decreased`)
             localStorage.setItem("cart", JSON.stringify(state.cartItems))
         },
         setClearCartItems: (state) => {
